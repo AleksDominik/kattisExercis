@@ -28,10 +28,6 @@ class PageOne(tk.Frame):
         tk.Frame.__init__(self, master)
         # tk.Frame.configure(self,bg='blue')
         # tk.Label(self, text="Page de jeu", font=('Helvetica', 18, "bold")).pack(side="top", fill=BOTH, pady=5)
-
-
-
-
         
         frame_left=Frame(self)
         self.frame_left=frame_left
@@ -89,11 +85,14 @@ class PageOne(tk.Frame):
 
 
     def update_clock(self):
-        now = time.strftime("%H:%M:%S")
-        self.label.configure(text=now)
-        self.master.after(1000,self.update_clock)
+        self.temps_de_rect=(time.time()-self.debut)
+        self.temps_de_rect=time.strftime("%H:%M:%S", time.gmtime(self.temps_de_rect))
+        self.label.configure(text=self.temps_de_rect)
+        if self.fin:
+            self.master.after(1000,self.update_clock)
 
     def commencer_un_jeu(self):
+        self.fin=True
         try :
             self.rejouer.destroy()
             self.label.config(text='')
@@ -103,10 +102,16 @@ class PageOne(tk.Frame):
         except:
             pass
 
+
         self.bt_valider=tk.Button(self.frame_left,text='valider', command=lambda: self.fin_du_jeu())
         self. bt_valider.pack(side='top',anchor='w')
 
         self.debut=time.time()
+        self.temps_de_rect=(time.time()-self.debut)
+        self.temps_de_rect=time.strftime("%H:%M:%S", time.gmtime(self.temps_de_rect))
+        self.label.configure(text=self.temps_de_rect)
+        self.update_clock()
+        
 
         self.rectangle.destroy()
         self.rectangle=tk.Canvas(self.frame1)
@@ -120,6 +125,7 @@ class PageOne(tk.Frame):
         for _ in range(self.nombre_j1):
             self.create_circle(20,self.rectangle,'blue')
     def fin_du_jeu(self):
+        self.fin=False
         if(int(self.Nombre_1.get())==self.nombre_j1 ) and (int(self.Nombre_2.get())==self.nombre_j2):
             #jeu gagné
             
