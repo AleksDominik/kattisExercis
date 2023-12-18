@@ -38,11 +38,7 @@ def generate_graph(j=5):
     return n,g,visited
 
 
-#n,g,visited=input_graph()  
-n,g,visited=generate_graph(20)        
-    
-    
-print(g)
+
 def dfs(at):
     print('I am visiting node ', at, visited)
     
@@ -53,7 +49,7 @@ def dfs(at):
     for next in neighbours:
         dfs(next)
 
-component=[0 for _ in range(n)]
+
 
 def findComponent():
     count=0
@@ -107,17 +103,24 @@ def breath_first(s,e):
     prev=solve(s)
     return reconstruct(s,e,prev)
 
-def top_sort():
-    #take a random node do a dfs and add backward evry node in a backtrack step of dfs
+# def top_sort():
+#     #take a random node do a dfs and add backward evry node in a backtrack step of dfs
 
     
-start_node=0
-#dfs(start_node)
-count=0
-#print(findComponent())
-print(breath_first(0,4))
+# start_node=0
+# #dfs(start_node)
+# count=0
+# #print(findComponent())
+# print(breath_first(0,4))
 
 
-#x= 
-#g=['A','B','C','D','E','F','G']
-#n=len(g)
+# #x= 
+# #g=['A','B','C','D','E','F','G']
+# #n=len(g)
+if __name__=='__main__':
+    #n,g,visited=input_graph()  
+    n,g,visited=generate_graph(20) 
+    component=[0 for _ in range(n)]       
+        
+        
+    print(g)
